@@ -17,7 +17,6 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(@Optional("CHROME") DriverType browser) {
         driver = new DriverFactory().getDriverManager(browser).createWebDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(Constants.URL);
     }
