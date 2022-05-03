@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class MyListener implements ITestListener {
 
-
     @SneakyThrows
     @Override
     public void onTestFailure(ITestResult result) {

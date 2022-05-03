@@ -1,15 +1,11 @@
 package tests;
 
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import utilities.Constants;
 import utilities.MyListener;
 import webdriver.DriverFactory;
-import webdriver.DriverManager;
 import webdriver.DriverType;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +15,7 @@ public class BaseTest {
 
     @Parameters("browser")
     @BeforeMethod
-    public void setUp(DriverType browser) {
+    public void setUp(@Optional("CHROME") DriverType browser) {
         driver = new DriverFactory().getDriverManager(browser).createWebDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
