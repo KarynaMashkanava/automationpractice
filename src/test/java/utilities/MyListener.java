@@ -24,7 +24,7 @@ public class MyListener implements ITestListener {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshot(ITestResult result) {
-        WebDriver driver = ((BaseTest) result.getInstance()).driver;
+        WebDriver driver = ((BaseTest) result.getInstance()).driver.get();
         TakesScreenshot screenShot = ((TakesScreenshot) driver);
         return screenShot.getScreenshotAs(OutputType.BYTES);
     }

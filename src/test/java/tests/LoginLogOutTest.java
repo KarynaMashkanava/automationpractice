@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +13,7 @@ import utilities.Constants;
 
 public class LoginLogOutTest extends BaseTest {
 
-    private LandingPage page;
+    private final ThreadLocal<LandingPage> page = new ThreadLocal<>();
     private final User USER = User.builder()
             .email(Constants.VALID_USERNAME)
             .password(Constants.VALID_PASSWORD)
@@ -20,25 +21,27 @@ public class LoginLogOutTest extends BaseTest {
 
     @BeforeMethod
     public void beforeEachTest() {
-        page = new LandingPage(driver);
+        page.set(new LandingPage(driver.get()));
     }
 
-    @Test
+    @Test(priority = 0)
+    @Description("Verify user is able to log in with valid data")
     public void loginWithValidCredentialsTest() {
-        MyAccountPage accountPage = page.clickSignIn().signIn(USER);
+        MyAccountPage accountPage = page.get().clickSignIn().signIn(USER);
         Assert.assertTrue(accountPage.isLogOutButtonDisplayed(), "User is not logged in!");
     }
 
-    @Test
-    public void logOutTest() {
-        page.clickSignIn().signIn(USER).logOut();
-        Assert.assertTrue(page.isSignInButtonPresent(), "User did not get logged out");
-
+    @Test(priority = 1)
+    @Description("Verify user is able to log out")
+    public void logOutTest() {;
+        page.get().clickSignIn().signIn(USER).logOut();
+        Assert.assertTrue(page.get().isSignInButtonPresent(), "User did not get logged out");
     }
 
-    @Test(dataProvider = "invalid data")
+    @Test(dataProvider = "invalid data", priority = 3)
+    @Description("Verify error message when user logs in with invalid data")
     public void loginInvalidCredentialsTest(User user, String expectedError) {
-        SignInPage signInPage = page.clickSignIn();
+        SignInPage signInPage = page.get().clickSignIn();
         signInPage
                 .typeEmail(user.getEmail())
                 .typePassword(user.getPassword())
