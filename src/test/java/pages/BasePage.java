@@ -1,24 +1,25 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
     @FindBy(xpath = "//a[@class = 'login']")
-    protected WebElement signInButton;
+    private WebElement signInButton;
 
     @FindBy(xpath = "//div[@class = 'shopping_cart']")
-    protected WebElement shoppingCartButton;
+    private WebElement shoppingCartButton;
 
     @FindBy(xpath = "//a[@class = 'logout']")
-    protected WebElement logOutButton;
+    private WebElement logOutButton;
+
+    @FindBy(xpath = "//div[@class = 'header_user_info']/a[@title = 'View my customer account']")
+    private WebElement myAccountHeaderLink;
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -36,5 +37,14 @@ public class BasePage {
 
     public Boolean isLogOutButtonDisplayed() {
         return logOutButton.isDisplayed();
+    }
+
+    public BasePage logOut() {
+        logOutButton.click();
+        return this;
+    }
+
+    public Boolean isSignInButtonPresent() {
+        return signInButton.isDisplayed();
     }
 }

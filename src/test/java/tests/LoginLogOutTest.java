@@ -10,9 +10,13 @@ import pages.MyAccountPage;
 import pages.SignInPage;
 import utilities.Constants;
 
-public class LoginTest extends BaseTest {
+public class LoginLogOutTest extends BaseTest {
 
     private LandingPage page;
+    private final User USER = User.builder()
+            .email(Constants.VALID_USERNAME)
+            .password(Constants.VALID_PASSWORD)
+            .build();
 
     @BeforeMethod
     public void beforeEachTest() {
@@ -21,13 +25,15 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginWithValidCredentialsTest() {
-        User user = User.builder()
-                .email(Constants.VALID_USERNAME)
-                .password(Constants.VALID_PASSWORD)
-                .build();
-
-        MyAccountPage accountPage = page.clickSignIn().signIn(user);
+        MyAccountPage accountPage = page.clickSignIn().signIn(USER);
         Assert.assertTrue(accountPage.isLogOutButtonDisplayed(), "User is not logged in!");
+    }
+
+    @Test
+    public void logOutTest() {
+        page.clickSignIn().signIn(USER).logOut();
+        Assert.assertTrue(page.isSignInButtonPresent(), "User did not get logged out");
+
     }
 
     @Test(dataProvider = "invalid data")

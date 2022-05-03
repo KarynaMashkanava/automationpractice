@@ -3,7 +3,7 @@
 <suite name="Automation Practice Tests" thread-count="2" parallel="tests">
     <test name="login test">
         <classes>
-            <class name="tests.LoginTest"> </class>
+            <class name="tests.LoginLogOutTest"> </class>
             <parameter name="browser" value="CHROME"/>
         </classes>
     </test>

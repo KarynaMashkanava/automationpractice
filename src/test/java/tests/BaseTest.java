@@ -7,8 +7,6 @@ import webdriver.DriverFactory;
 import webdriver.DriverType;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
-
 @Listeners(MyListener.class)
 public class BaseTest {
     public WebDriver driver;
