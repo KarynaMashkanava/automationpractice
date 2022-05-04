@@ -1,10 +1,12 @@
 package pages;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j
 public class CheckOutPage extends BasePage {
 
     @FindBy(id = "order")
@@ -25,15 +27,18 @@ public class CheckOutPage extends BasePage {
     }
 
     public Boolean isProductNameCorrect(String expected) {
+        log.info("verify product name is correct");
         return productNameElement.getText().contains(expected);
     }
 
     public CheckoutAddressPage clickProceedToCheckOutPage() {
+        log.info("click proceed to check out");
         proceedToCheckoutPage.click();
         return new CheckoutAddressPage(driver);
     }
 
     public CheckOutPage deleteItemFromCart() {
+        log.info("click delete item from cart");
         deleteItemFromCartButton.click();
         return this;
     }

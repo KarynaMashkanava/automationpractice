@@ -32,6 +32,9 @@ public class BasePage {
     @FindBy(xpath = "//p[@class = 'alert alert-warning']")
     protected WebElement searchAlertWarningElement;
 
+    @FindBy(xpath = "//div[@class = 'footer-container'] //a[@title = 'Sign out']")
+    protected WebElement footerLogOut;
+
     protected WebDriver driver;
     protected WebDriverWait wait;
 
@@ -79,5 +82,10 @@ public class BasePage {
     public String getWarningMessageText() {
         wait.until(ExpectedConditions.visibilityOf(searchAlertWarningElement));
         return searchAlertWarningElement.getText();
+    }
+
+    public BasePage clickFooterLogout() {
+        footerLogOut.click();
+        return this;
     }
 }

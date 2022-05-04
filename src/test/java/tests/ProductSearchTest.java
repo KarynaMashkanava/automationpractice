@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ public class ProductSearchTest extends BaseTest {
     }
 
     @Test
+    @Description("Verify product search is for existing product")
     public void searchProductTest() {
         SearchResultPage searchResultPage = landingPage
                 .typeSearchName(Constants.SEARCH_CRITERIA)
@@ -26,6 +28,7 @@ public class ProductSearchTest extends BaseTest {
     }
 
     @Test
+    @Description("Verify product warning message for empty search")
     public void searchEmptyTest() {
         SearchResultPage searchResultPage = landingPage
                 .typeSearchName("")

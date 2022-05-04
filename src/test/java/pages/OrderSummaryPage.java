@@ -1,10 +1,12 @@
 package pages;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j
 public class OrderSummaryPage extends BasePage {
 
     @FindBy(xpath = "//div[contains(@class, 'cheque-box')]")
@@ -19,6 +21,7 @@ public class OrderSummaryPage extends BasePage {
     }
 
     public OrderConfirmationPage confirmOrder() {
+        log.info("click confirm order");
         confirmOrderButton.click();
         return new OrderConfirmationPage(driver);
     }

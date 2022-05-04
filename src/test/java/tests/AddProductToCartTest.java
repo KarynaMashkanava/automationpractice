@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,6 +9,7 @@ import pages.CheckoutShippingPage;
 import pages.LandingPage;
 import pages.OrderConfirmationPage;
 import utilities.Constants;
+import utilities.Retry;
 
 public class AddProductToCartTest extends BaseTest {
 
@@ -27,18 +29,21 @@ public class AddProductToCartTest extends BaseTest {
                 .openCartPage();
     }
 
-    @Test
+    @Test(priority = 0, retryAnalyzer = Retry.class)
+    @Description("Verify user is able to add product to cart")
     public void addProductToCartTest() {
         Assert.assertTrue(checkOutPage.isProductNameCorrect(Constants.SEARCH_CRITERIA_SINGLE_ITEM));
     }
 
-    @Test
+    @Test(priority = 1, retryAnalyzer = Retry.class)
+    @Description("Verify user is able to delete product from cart")
     public void deleteItemFromCart() {
         checkOutPage.deleteItemFromCart();
         Assert.assertEquals(checkOutPage.getWarningMessageText(), "Your shopping cart is empty.");
     }
 
-    @Test
+    @Test(priority = 2, retryAnalyzer = Retry.class)
+    @Description("Validate error message when accept terms is not checked")
     public void validateErrorWhenAgreeWithTermsNotChecked() {
         CheckoutShippingPage checkoutShippingPage = checkOutPage
                 .clickProceedToCheckOutPage()
@@ -48,7 +53,8 @@ public class AddProductToCartTest extends BaseTest {
         Assert.assertEquals(checkoutShippingPage.getTermsErrorMessage(), "You must agree to the terms of service before continuing.");
     }
 
-    @Test
+    @Test(priority = 3, retryAnalyzer = Retry.class)
+    @Description("End-to-end scenario to create order")
     public void createOrderTest() {
         OrderConfirmationPage orderConfirmationPage = checkOutPage
                 .clickProceedToCheckOutPage()

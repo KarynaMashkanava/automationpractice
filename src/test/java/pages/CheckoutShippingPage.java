@@ -1,10 +1,12 @@
 package pages;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j
 public class CheckoutShippingPage extends BasePage {
 
     @FindBy(className = "delivery_options_address")
@@ -25,6 +27,7 @@ public class CheckoutShippingPage extends BasePage {
     }
 
     public CheckoutShippingPage checkAgreeWithTerms() {
+        log.info("check agree with terms");
         if (!agreeWithTermsCheckbox.getAttribute("class").equals("checked")) {
             agreeWithTermsCheckbox.click();
         }
@@ -32,11 +35,13 @@ public class CheckoutShippingPage extends BasePage {
     }
 
     public CheckoutPaymentPage clickProceedToCheckoutPage() {
+        log.info("click proceed to checkout");
         proceedToCheckoutButton.click();
         return new CheckoutPaymentPage(driver);
     }
 
     public CheckoutShippingPage clickProceedToCheckoutPageWithError() {
+        log.info("click proceed to checkout and expecting to receive error");
         proceedToCheckoutButton.click();
         return new CheckoutShippingPage(driver);
     }

@@ -42,6 +42,17 @@ public class LoginLogOutTest extends BaseTest {
         Assert.assertTrue(landingPage.isSignInButtonPresent(), "User did not get logged out");
     }
 
+    @Test(priority = 4, retryAnalyzer = Retry.class)
+    @Description("Verify user is able to log out from footer section")
+    public void logOutFromFooterTest() {;
+        landingPage
+                .clickSignIn()
+                .signIn(USER)
+                .clickFooterLogout();
+
+        Assert.assertTrue(landingPage.isSignInButtonPresent(), "User did not get logged out");
+    }
+
     @Test(dataProvider = "invalid data", priority = 3, retryAnalyzer = Retry.class)
     @Description("Verify error message when user logs in with invalid data")
     public void loginInvalidCredentialsTest(User user, String expectedError) {
