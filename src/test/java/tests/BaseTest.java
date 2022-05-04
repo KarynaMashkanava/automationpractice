@@ -1,33 +1,32 @@
 package tests;
 
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
+import models.User;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
 import utilities.Constants;
 import utilities.MyListener;
 import webdriver.DriverFactory;
-import webdriver.DriverManager;
 import webdriver.DriverType;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import java.util.concurrent.TimeUnit;
 
 @Listeners(MyListener.class)
 public class BaseTest {
-    public WebDriver driver;
+    public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    protected final User USER = User.builder()
+            .email(Constants.VALID_USERNAME)
+            .password(Constants.VALID_PASSWORD)
+            .build();
 
     @Parameters("browser")
     @BeforeMethod
-    public void setUp(DriverType browser) {
-        driver = new DriverFactory().getDriverManager(browser).createWebDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(Constants.URL);
+    public void setUp(@Optional("CHROME") DriverType browser) {
+        driver.set(new DriverFactory().getDriverManager(browser).createWebDriver());
+        driver.get().manage().window().maximize();
+        driver.get().get(Constants.URL);
     }
 
     @AfterMethod()
     public void tearDown() {
-        driver.quit();
+        driver.get().quit();
     }
 }

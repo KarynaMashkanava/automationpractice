@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation Practice Tests" thread-count="3" parallel="classes">
+    <test name="test">
+        <classes>
+            <class name="tests.LoginLogOutTest"> </class>
+            <class name="tests.ProductSearchTest"> </class>
+            <class name="tests.AddProductToCartTest"> </class>
+            <parameter name="browser" value="CHROME"/>
+        </classes>
+    </test>
+</suite>
