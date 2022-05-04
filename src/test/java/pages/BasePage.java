@@ -20,9 +20,6 @@ public class BasePage {
     @FindBy(xpath = "//a[@class = 'logout']")
     protected WebElement logOutButton;
 
-    @FindBy(xpath = "//div[@class = 'header_user_info']/a[@title = 'View my customer account']")
-    protected WebElement myAccountHeaderLink;
-
     @FindBy(id = "search_query_top")
     protected WebElement searchInput;
 
