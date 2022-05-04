@@ -16,9 +16,6 @@ public class SearchResultPage extends BasePage {
     @FindBy(xpath = "//ul[@class = 'product_list grid row']/li[contains(@class, 'block_product')]")
     private List<WebElement> productsOnPage;
 
-    @FindBy(xpath = "//p[@class = 'alert alert-warning']")
-    private WebElement searchAlertWarningElement;
-
     @FindBy(xpath = "//a[@title = 'Add to cart']")
     private List<WebElement> addProductToCartElements;
 
@@ -29,10 +26,6 @@ public class SearchResultPage extends BasePage {
 
     public Integer getNumberOfSearchResults() {
         return productsOnPage.size();
-    }
-
-    public Boolean warningMessageContainsExpectedWarning(String warning) {
-        return searchAlertWarningElement.getText().contains(warning);
     }
 
     public ProductAddedToCartPopUp clickAddProductToCartForNthElement(Integer position) {

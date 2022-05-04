@@ -5,28 +5,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Log4j
 public class BasePage {
 
     @FindBy(xpath = "//a[@class = 'login']")
-    private WebElement signInButton;
+    protected WebElement signInButton;
 
     @FindBy(xpath = "//a[@title = 'View my shopping cart']")
-    private WebElement shoppingCartButton;
+    protected WebElement shoppingCartButton;
 
     @FindBy(xpath = "//a[@class = 'logout']")
-    private WebElement logOutButton;
+    protected WebElement logOutButton;
 
     @FindBy(xpath = "//div[@class = 'header_user_info']/a[@title = 'View my customer account']")
-    private WebElement myAccountHeaderLink;
+    protected WebElement myAccountHeaderLink;
 
     @FindBy(id = "search_query_top")
-    private WebElement searchInput;
+    protected WebElement searchInput;
 
     @FindBy(name = "submit_search")
-    private WebElement submitSearchElement;
+    protected WebElement submitSearchElement;
+
+    @FindBy(xpath = "//p[@class = 'alert alert-warning']")
+    protected WebElement searchAlertWarningElement;
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -70,5 +74,10 @@ public class BasePage {
     public CheckOutPage openCartPage() {
         shoppingCartButton.click();
         return new CheckOutPage(driver);
+    }
+
+    public String getWarningMessageText() {
+        wait.until(ExpectedConditions.visibilityOf(searchAlertWarningElement));
+        return searchAlertWarningElement.getText();
     }
 }

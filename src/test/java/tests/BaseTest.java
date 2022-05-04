@@ -3,7 +3,6 @@ package tests;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import pages.LandingPage;
 import utilities.Constants;
 import utilities.MyListener;
 import webdriver.DriverFactory;
@@ -12,7 +11,6 @@ import webdriver.DriverType;
 @Listeners(MyListener.class)
 public class BaseTest {
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    protected final ThreadLocal<LandingPage> page = new ThreadLocal<>();
 
     protected final User USER = User.builder()
             .email(Constants.VALID_USERNAME)
@@ -25,7 +23,6 @@ public class BaseTest {
         driver.set(new DriverFactory().getDriverManager(browser).createWebDriver());
         driver.get().manage().window().maximize();
         driver.get().get(Constants.URL);
-        page.set(new LandingPage(driver.get()));
     }
 
     @AfterMethod()

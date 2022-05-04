@@ -8,6 +8,9 @@
 - Verify user is able to log in with valid data
 - Verify error message when user logs in with invalid data
 - Verify user is able to log out
+- Verify product search is for existing product
+- Verify product warning message for empty search
+- Verify user is able to add product to cart
 
 
 

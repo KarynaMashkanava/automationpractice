@@ -10,9 +10,6 @@ public class ProductAddedToCartPopUp extends BasePage {
     @FindBy(className = "cross")
     private WebElement closePopUp;
 
-    @FindBy(id = "//a[@title = 'Proceed to checkout']")
-    private WebElement proceedToCheckoutButton;
-
     public ProductAddedToCartPopUp(WebDriver driver) {
         super(driver);
         wait.until(ExpectedConditions.visibilityOf(closePopUp));
